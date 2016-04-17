@@ -8,13 +8,15 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hollislau/router_framework.git"
   },
-  "author": "hollislau@hotmail.com",
+  "author": {
+    "name": "Hollis Lau",
+    "email": "hollislau@hotmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hollislau/router_framework/issues"
