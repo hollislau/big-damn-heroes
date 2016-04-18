@@ -55,6 +55,22 @@ describe("big damn heroes server", () => {
       });
   });
 
+  it("responds with a new quote on a GET request to /", (done) => {
+    bdh.get("/", (req, res) => {
+      res.send("Big damn heroes, sir.");
+    });
+
+    request("localhost:8888")
+      .get("/")
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res).to.have.header("content-type", "text/plain");
+        expect(res.text).to.eql("Big damn heroes, sir.");
+        done();
+      });
+  });
+
   it("responds with a default 404 on a bad route", (done) => {
     request("localhost:8888")
       .get("/reavers")
@@ -67,17 +83,69 @@ describe("big damn heroes server", () => {
       });
   });
 
-  it("writes a JSON file on a POST request to /serenity", (done) => {
+  it("responds with a new 404 on a bad route", (done) => {
+    bdh.badRoute((req, res) => {
+      res.send("Best be on your merry.");
+    });
+
+    request("localhost:8888")
+      .get("/miranda")
+      .end((err, res) => {
+        expect(err).to.eql(err);
+        expect(res).to.have.status(404);
+        expect(res).to.have.header("content-type", "text/plain");
+        expect(res.text).to.eql("Best be on your merry.");
+        done();
+      });
+  });
+
+  it("writes a JSON file and responds with JSON on a POST request to /serenity", (done) => {
     request("localhost:8888")
       .post("/serenity")
       .send({ "Wash": "I'm a leaf on the wind" })
       .end((err, res) => {
-        var parsed = JSON.parse(res.text);
-
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res).to.have.header("content-type", "application/json");
-        expect(parsed.Wash).to.eql("I'm a leaf on the wind");
+        expect(res.body.Wash).to.eql("I'm a leaf on the wind");
+        done();
+      });
+  });
+
+  it("responds with a JSON serialized object on a PUT request to /mal", (done) => {
+    request("localhost:8888")
+      .put("/mal")
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res).to.have.header("content-type", "application/json");
+        expect(res.body.Mal).to.eql("I aim to misbehave.");
+        done();
+      });
+  });
+
+  it("responds with a JSON serialized array on a PATCH request to /jayne", (done) => {
+    request("localhost:8888")
+      .patch("/jayne")
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res).to.have.header("content-type", "application/json");
+        expect(res.body.join(" ")).to.eql("I'll be in my bunk.");
+        done();
+      });
+  });
+
+  it("responds with a buffer on a DELETE request to /kaylee", (done) => {
+    request("localhost:8888")
+      .delete("/kaylee")
+      .end((err, res) => {
+        var str = res.text.toString("utf8");
+
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res).to.have.header("content-type", "text/plain");
+        expect(str).to.eql("To hell with this, I'm gonna live!");
         done();
       });
   });
