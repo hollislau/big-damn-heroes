@@ -12,3 +12,4 @@ coverage/
 Makefile
 *.swp
 .DS_Store
+.eslintrc

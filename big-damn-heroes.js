@@ -1,1 +1,1 @@
-module.exports = require(__dirname + "/lib/server");
+module.exports = require(__dirname + "/lib/big-damn-heroes");
