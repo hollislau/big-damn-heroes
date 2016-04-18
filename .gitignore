@@ -39,3 +39,7 @@ Thumbs.db
 # Node modules #
 ################
 node_modules
+
+# Test files #
+##############
+bdh.js
