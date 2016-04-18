@@ -13,3 +13,6 @@ Makefile
 *.swp
 .DS_Store
 .eslintrc
+node_modules
+test/data
+bdh.js
