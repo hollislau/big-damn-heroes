@@ -78,7 +78,7 @@ describe("big damn heroes server", () => {
         expect(err).to.eql(err);
         expect(res).to.have.status(404);
         expect(res).to.have.header("content-type", "text/plain");
-        expect(res.text).to.eql("Gorramit! That ain't ruttin' here!");
+        expect(res.text).to.eql("Gorramit! That ain't ruttin' here! (404: Not Found)");
         done();
       });
   });
