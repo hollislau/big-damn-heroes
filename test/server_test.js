@@ -61,9 +61,9 @@ describe("big damn heroes server", () => {
       });
   });
 
-  it("responds with a new quote on a GET request to /", (done) => {
+  it("responds with nothing on a GET request to /", (done) => {
     bdh.get("/", (req, res) => {
-      res.send("Big damn heroes, sir.");
+      res.send();
     });
 
     request("localhost:5000")
@@ -72,7 +72,7 @@ describe("big damn heroes server", () => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res).to.have.header("content-type", "text/plain");
-        expect(res.text).to.eql("Big damn heroes, sir.");
+        expect(res.text).to.eql("");
         done();
       });
   });
