@@ -10,6 +10,12 @@ describe("big damn heroes server", () => {
   var bdhServer;
 
   before(() => {
+    try {
+      fs.mkdirSync(__dirname + "/data");
+    } catch (err) {
+      if (err === "EEXIST") return;
+    }
+
     bdh.post("/serenity", (req, res) => {
       var file = fs.createWriteStream(__dirname + "/data/river.json");
 
@@ -34,7 +40,7 @@ describe("big damn heroes server", () => {
       res.send(new Buffer("To hell with this, I'm gonna live!"));
     });
 
-    bdhServer = bdh.listen(8888);
+    bdhServer = bdh.listen(5000);
   });
 
   after((done) => {
@@ -44,7 +50,7 @@ describe("big damn heroes server", () => {
   });
 
   it("responds with a default quote on a GET request to /", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .get("/")
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -60,7 +66,7 @@ describe("big damn heroes server", () => {
       res.send("Big damn heroes, sir.");
     });
 
-    request("localhost:8888")
+    request("localhost:5000")
       .get("/")
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -72,7 +78,7 @@ describe("big damn heroes server", () => {
   });
 
   it("responds with a default 404 on a bad route", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .get("/reavers")
       .end((err, res) => {
         expect(err).to.eql(err);
@@ -88,7 +94,7 @@ describe("big damn heroes server", () => {
       res.send("Best be on your merry.");
     });
 
-    request("localhost:8888")
+    request("localhost:5000")
       .get("/miranda")
       .end((err, res) => {
         expect(err).to.eql(err);
@@ -100,7 +106,7 @@ describe("big damn heroes server", () => {
   });
 
   it("writes a JSON file and responds with JSON on a POST request to /serenity", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .post("/serenity")
       .send({ "Wash": "I'm a leaf on the wind" })
       .end((err, res) => {
@@ -113,7 +119,7 @@ describe("big damn heroes server", () => {
   });
 
   it("responds with a JSON serialized object on a PUT request to /mal", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .put("/mal")
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -125,7 +131,7 @@ describe("big damn heroes server", () => {
   });
 
   it("responds with a JSON serialized array on a PATCH request to /jayne", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .patch("/jayne")
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -137,7 +143,7 @@ describe("big damn heroes server", () => {
   });
 
   it("responds with a buffer on a DELETE request to /kaylee", (done) => {
-    request("localhost:8888")
+    request("localhost:5000")
       .delete("/kaylee")
       .end((err, res) => {
         var str = res.text.toString("utf8");
