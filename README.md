@@ -1,5 +1,5 @@
 # Big-Damn-Heroes Server Framework
-Big-Damn-Heroes (BDH) makes writing your server, routes, and HTTP responses easier while adding some flavor for [Firefly](https://en.wikipedia.org/wiki/Firefly_(TV_series) fans.
+Big-Damn-Heroes (BDH) makes writing your server, routes, and HTTP responses easier while adding some flavor for [Firefly](https://en.wikipedia.org/wiki/Firefly_(TV_series)) fans.
 
 ## Installation
 Assuming you've already installed [Node.js](https://nodejs.org/), get started by using `npm init` to create a `package.json` file in your project directory:
