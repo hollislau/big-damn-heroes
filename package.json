@@ -1,27 +1,34 @@
 {
   "name": "big-damn-heroes",
-  "version": "0.1.0",
-  "description": "A simple http router framework",
-  "main": "big-damn-heroes.js",
+  "version": "1.0.0",
+  "description": "A lightweight, Firefly-themed HTTP server framework",
+  "main": "./index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha test/**/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hollislau/router_framework.git"
+    "url": "git+https://github.com/hollislau/big-damn-heroes.git"
   },
+  "keywords": [
+    "server",
+    "http",
+    "router",
+    "framework",
+    "firefly"
+  ],
   "author": {
     "name": "Hollis Lau",
     "email": "hollislau@hotmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hollislau/router_framework/issues"
+    "url": "https://github.com/hollislau/big-damn-heroes/issues"
   },
-  "homepage": "https://github.com/hollislau/router_framework#readme",
+  "homepage": "https://github.com/hollislau/big-damn-heroes#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
